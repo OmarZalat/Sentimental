@@ -1,0 +1,33 @@
+.ruled_lines_container {
+  height: 90%;
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  padding-left: 4rem;
+}
+
+.ruled_line_input {
+  border: none; /* Remove border */
+  border-bottom: 1px solid black; /* Style the ruled line */
+  margin-bottom: 2rem; /* Adjust line spacing */
+  font-size: 1rem; /* Adjust font size */
+  width: 100%; /* Fill the entire container width */
+  resize: none; /* Prevent users from resizing the text area */
+  white-space: pre-wrap; /* Allow text to wrap */
+}
+
+.save_button {
+  align-self: center;
+  width: 5.5rem;
+  height: 2.5rem;
+  background-color: #e48765;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  transition: 0.5s;
+}
+
+.save_button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

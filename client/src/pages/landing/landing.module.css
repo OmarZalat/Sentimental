@@ -1,0 +1,42 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+}
+
+.landing_pic_1 {
+  width: 70%;
+  background-image: url("../../../public/background_landing_1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.landing_pic_2 {
+  width: 30%;
+  background-image: url("../../../public/background_landing_2.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: -5rem center;
+}
+
+.signIn_button {
+  position: absolute;
+  top: 3rem;
+  right: 11rem;
+  width: 8rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #e48765;
+  color: white;
+  font-size: 1.2rem;
+  transition: 0.5s;
+  border: none;
+}
+
+.signIn_button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

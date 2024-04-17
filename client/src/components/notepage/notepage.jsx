@@ -16,6 +16,7 @@ export default function Notepage() {
           className={`${styles.journal_entry} ${styles.notes}`}
           value={journalEntry}
           onChange={handleChange}
+          maxLength={1120}
         />
         <button className={styles.save_button}>Save</button>
       </div>

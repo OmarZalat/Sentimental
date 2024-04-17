@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from supabase_py import create_client
 import os
 from dotenv import load_dotenv
@@ -21,3 +21,8 @@ def get_users():
     # Get the data from the result
     data = result['data']
     return jsonify(data)
+
+# @user_bp.route('/auth/google/callback', methods=['POST'])
+# def google_auth_callback():
+#     token = request.json.get('token')
+#     return {'message': 'User authenticated successfully'}, 200

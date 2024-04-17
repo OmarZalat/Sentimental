@@ -6,7 +6,6 @@
 
 .notepage {
   width: 50%;
-  /* background-color: red; */
 }
 
 .wrapper {
@@ -42,7 +41,7 @@
 .journal_pic {
   width: 100%;
   height: 100%;
-  background-image: url("../../../public/journal.png");
+  background-image: url("/journal.png");
   transform: scaleX(-1); /* Invert horizontally */
   background-size: contain;
   background-repeat: no-repeat;

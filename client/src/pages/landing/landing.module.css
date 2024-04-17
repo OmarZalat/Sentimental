@@ -9,14 +9,14 @@
 
 .landing_pic_1 {
   width: 70%;
-  background-image: url("../../../public/background_landing_1.png");
+  background-image: url("background_landing_1.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .landing_pic_2 {
   width: 30%;
-  background-image: url("../../../public/background_landing_2.png");
+  background-image: url("background_landing_2.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: -5rem center;

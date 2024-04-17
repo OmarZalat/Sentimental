@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 2rem;
+  /* width: 90%; */
 }
 
 .notes {
@@ -28,15 +29,33 @@
 .journal_entry {
   width: 80%;
   height: 28.125rem; /* Adjust height as needed */
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   margin: 2rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 0.313rem;
   resize: vertical; /* Allow vertical resizing */
   line-height: 2rem; /* Match line height with the pattern */
+  resize: none;
 }
 
 .journal_entry h1 {
   padding: 2rem;
+}
+
+.save_button {
+  align-self: center;
+  width: 5.5rem;
+  height: 2.5rem;
+  background-color: #e48765;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  transition: 0.5s;
+  font-size: 1rem;
+}
+
+.save_button:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }

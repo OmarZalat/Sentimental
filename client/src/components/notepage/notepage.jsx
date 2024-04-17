@@ -17,6 +17,7 @@ export default function Notepage() {
           value={journalEntry}
           onChange={handleChange}
         />
+        <button className={styles.save_button}>Save</button>
       </div>
     </>
   );

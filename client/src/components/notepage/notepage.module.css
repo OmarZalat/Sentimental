@@ -1,19 +1,46 @@
-.ruled_lines_container {
-  height: 90%;
-  padding-top: 4rem;
+.journal {
   display: flex;
   flex-direction: column;
-  padding-left: 4rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+  /* width: 90%; */
 }
 
-.ruled_line_input {
-  border: none; /* Remove border */
-  border-bottom: 1px solid black; /* Style the ruled line */
-  margin-bottom: 2rem; /* Adjust line spacing */
-  font-size: 1rem; /* Adjust font size */
-  width: 100%; /* Fill the entire container width */
-  resize: none; /* Prevent users from resizing the text area */
-  white-space: pre-wrap; /* Allow text to wrap */
+.notes {
+  background-attachment: local;
+  background-image: linear-gradient(
+      to right,
+      white 0.625rem,
+      transparent 0.625rem
+    ),
+    linear-gradient(to left, white 0.625rem, transparent 0.625rem),
+    repeating-linear-gradient(
+      white,
+      white 1.875rem,
+      #ccc 1.875rem,
+      #ccc 1.9375rem,
+      white 1.9375rem
+    );
+  line-height: 1.9375rem;
+  padding: 0.5rem 0.625rem;
+}
+
+.journal_entry {
+  width: 80%;
+  height: 28.125rem; /* Adjust height as needed */
+  padding: 2rem 2rem 0 2rem;
+  margin: 2rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.313rem;
+  resize: vertical; /* Allow vertical resizing */
+  line-height: 2rem; /* Match line height with the pattern */
+  resize: none;
+}
+
+.journal_entry h1 {
+  padding: 2rem;
 }
 
 .save_button {
@@ -25,6 +52,7 @@
   border: none;
   border-radius: 0.5rem;
   transition: 0.5s;
+  font-size: 1rem;
 }
 
 .save_button:hover {

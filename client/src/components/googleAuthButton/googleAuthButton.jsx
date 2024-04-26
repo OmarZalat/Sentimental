@@ -20,11 +20,19 @@ export default function GoogleAuthButton() {
         );
         console.log(res);
 
+        // Send the user's data to the Flask backend
+        const backendResponse = await axios.post(
+          "http://localhost:5000/api/user",
+          res.data
+        );
+        console.log(backendResponse);
+
         navigate("/journal");
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
+    // ...
   });
   return (
     <>

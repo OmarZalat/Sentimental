@@ -13,7 +13,7 @@ supabase = create_client(supabase_url, supabase_key)
 
 user_bp = Blueprint('user', __name__)
 
-# Example route to fetch user data from the 'users' table
+# Route to fetch user data from the 'users' table
 @user_bp.route('/api/users', methods=['GET'])
 def get_users():
     # Query data from the 'users' table
@@ -22,7 +22,20 @@ def get_users():
     data = result['data']
     return jsonify(data)
 
-# @user_bp.route('/auth/google/callback', methods=['POST'])
-# def google_auth_callback():
-#     token = request.json.get('token')
-#     return {'message': 'User authenticated successfully'}, 200
+# Route to receive user data from the frontend and save it to the 'users' table
+@user_bp.route('/api/user', methods=['POST'])
+def save_user():
+    # Get the user data from the request body
+    user_data = request.get_json()
+
+    # Structure the data for insertion into the 'users' table
+    data_to_insert = {
+        'username': user_data.get('given_name'),
+        'email': user_data.get('email'),
+    }
+
+    # Insert the user data into the 'users' table
+    result = supabase.table('users').insert(data_to_insert).execute()
+
+    # Return a success message
+    return jsonify({'message': 'User data saved successfully'})

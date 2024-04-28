@@ -3,6 +3,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import styles from "./googleAuthButton.module.css";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function GoogleAuthButton() {
   const navigate = useNavigate();
@@ -27,12 +28,20 @@ export default function GoogleAuthButton() {
         );
         console.log(backendResponse);
 
+        // Cookies.set("token", response.token_type, { expires: 7 });
+        Cookies.set("token", response.access_token, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
+
+        console.log("Token:", Cookies.get("token"));
+
         navigate("/journal");
       } catch (err) {
         console.error(err);
       }
     },
-    // ...
   });
   return (
     <>

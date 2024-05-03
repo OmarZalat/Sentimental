@@ -20,7 +20,7 @@ def get_users():
     result = supabase.table('users').select().execute()
     # Get the data from the result
     data = result['data']
-    return jsonify(data)
+    return jsonify(data) 
 
 # Route to receive user data from the frontend and save it to the 'users' table
 @user_bp.route('/api/user', methods=['POST'])

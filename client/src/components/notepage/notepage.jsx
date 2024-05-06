@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./notepage.module.css";
 import { UserContext } from "../../userProvider";
+import axios from "axios";
 
 export default function Notepage() {
   const { userData } = useContext(UserContext);
@@ -32,6 +33,24 @@ export default function Notepage() {
     }
   }, [userData]);
 
+  const saveJournalEntry = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/journal", {
+        user_id: userId,
+        entry_text: journalEntry,
+        entry_timestamp: new Date().toISOString(), // Add timestamp
+      });
+      if (response.status === 200) {
+        console.log("Journal entry saved successfully.");
+        // Clear the journal entry after saving
+        // setJournalEntry("");
+      } else {
+        console.error("Failed to save journal entry.");
+      }
+    } catch (error) {
+      console.error("Error saving journal entry:", error);
+    }
+  };
   const handleChange = (e) => {
     setJournalEntry(e.target.value);
   };
@@ -47,7 +66,9 @@ export default function Notepage() {
           onChange={handleChange}
           maxLength={1120}
         />
-        <button className={styles.save_button}>Save</button>
+        <button className={styles.save_button} onClick={saveJournalEntry}>
+          Save
+        </button>
       </div>
     </>
   );

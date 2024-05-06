@@ -15,16 +15,28 @@ supabase = create_client(supabase_url, supabase_key)
 journal_bp = Blueprint('journal', __name__)
 
 # Route to Add a New Journal Entry
+# Route to Add a New Journal Entry
 @journal_bp.route('/api/journal', methods=['POST'])
 def add_journal_entry():
+    print('Received POST request to /api/journal')
     entry_data = request.json
+
+    # Log the received data
+    print('Received data:', entry_data)
+
+    # user_id = request.headers.get('user_id')
+
+    # entry_data['user_id'] = user_id
 
     result = supabase.table('journal_entries').insert(entry_data).execute()
 
-    if result['error']:
+    # Log the result
+    print('Insertion result:', result)
+    if not result['data']:
         return jsonify({'error': 'Failed to add journal entry.'}), 500
     else:
-        return jsonify({'message': 'Journal entry added successfully.'}), 201
+        return jsonify({'message': 'Journal entry added successfully.'}), 200
+
 
 # Route to Fetch Journal Entries
 @journal_bp.route('/api/journal', methods=['GET'])

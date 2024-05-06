@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import styles from "./googleAuthButton.module.css";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { UserContext } from "../../userProvider"; // Adjusted import to use named import
 
 export default function GoogleAuthButton() {
   const navigate = useNavigate();
+  const { updateUser } = useContext(UserContext);
 
   const login = useGoogleLogin({
     onSuccess: async (response) => {
@@ -36,6 +38,8 @@ export default function GoogleAuthButton() {
         });
 
         console.log("Token:", Cookies.get("token"));
+
+        updateUser(res.data);
 
         navigate("/journal");
       } catch (err) {

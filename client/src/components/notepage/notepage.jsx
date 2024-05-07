@@ -33,6 +33,26 @@ export default function Notepage() {
     }
   }, [userData]);
 
+  useEffect(() => {
+    // Fetch journal entries and filter by user id
+    const fetchJournalEntries = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/api/journal`);
+        const data = await response.json();
+        const userEntries = data.filter((entry) => entry.user_id === userId);
+        console.log(userEntries);
+        setJournalEntry(userEntries[0].entry_text);
+      } catch (error) {
+        console.error("Error fetching journal entries:", error);
+      }
+    };
+
+    // Only fetch if userId is not null
+    if (userId) {
+      fetchJournalEntries();
+    }
+  }, [userId]); // Depend on userId so it runs whenever userId changes
+
   const saveJournalEntry = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/journal", {

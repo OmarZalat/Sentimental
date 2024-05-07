@@ -7,6 +7,8 @@ export default function Notepage() {
   const { userData } = useContext(UserContext);
   const [journalEntry, setJournalEntry] = useState("");
   const [userId, setUserId] = useState(null);
+  const [userEntries, setUserEntries] = useState([]);
+  const [entryId, setEntryId] = useState(null);
 
   useEffect(() => {
     // Fetch user data to get user_id based on email
@@ -37,11 +39,18 @@ export default function Notepage() {
     // Fetch journal entries and filter by user id
     const fetchJournalEntries = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/journal`);
-        const data = await response.json();
+        const response = await axios.get("http://localhost:5000/api/journal");
+        const data = response.data;
         const userEntries = data.filter((entry) => entry.user_id === userId);
         console.log(userEntries);
-        setJournalEntry(userEntries[0].entry_text);
+        setUserEntries(userEntries); // Assuming you have a state variable for user entries
+
+        // If the user has entries, set the journalEntry state to the entry_text of the first entry
+        if (userEntries.length > 0) {
+          setJournalEntry(userEntries[0].entry_text);
+          setEntryId(userEntries[0].entry_id);
+          console.log(entryId);
+        }
       } catch (error) {
         console.error("Error fetching journal entries:", error);
       }
@@ -54,12 +63,20 @@ export default function Notepage() {
   }, [userId]); // Depend on userId so it runs whenever userId changes
 
   const saveJournalEntry = async () => {
+    const url = "http://localhost:5000/api/journal";
+    const method = entryId ? "put" : "post";
+
     try {
-      const response = await axios.post("http://localhost:5000/api/journal", {
-        user_id: userId,
-        entry_text: journalEntry,
-        entry_timestamp: new Date().toISOString(), // Add timestamp
-      });
+      console.log(entryId);
+      const response = await axios[method](
+        entryId ? `${url}/${entryId}` : url,
+        {
+          user_id: userId,
+          entry_text: journalEntry,
+          entry_timestamp: new Date().toISOString(), // Add timestamp
+        }
+      );
+
       if (response.status === 200) {
         console.log("Journal entry saved successfully.");
         // Clear the journal entry after saving

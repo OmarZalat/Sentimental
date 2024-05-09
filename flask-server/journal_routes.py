@@ -45,17 +45,13 @@ def get_journal_entries():
     data = result['data']
     return jsonify(data)
 
-# Route to Update a Journal Entry
-@journal_bp.route('/api/journal/<int:entry_id>', methods=['PUT'])
-def update_journal_entry(entry_id):
-    updated_entry_data = request.json
+#route to fetch a single journal entry according to the entry id
+@journal_bp.route('/api/journal/<string:entry_id>', methods=['GET'])
+def get_single_journal_entry(entry_id):
+    result = supabase.table('journal_entries').select().eq('entry_id', entry_id).execute()
+    data = result['data']
+    return jsonify(data)
 
-    result = supabase.table('journal_entries').update(updated_entry_data).where('id', '=', entry_id).execute()
-
-    if result['error']:
-        return jsonify({'error': 'Failed to update journal entry.'}), 500
-    else:
-        return jsonify({'message': 'Journal entry updated successfully.'}), 200
 
 # Route to Delete a Journal Entry
 @journal_bp.route('/api/journal/<int:entry_id>', methods=['DELETE'])

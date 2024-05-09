@@ -52,29 +52,6 @@ def get_single_journal_entry(entry_id):
     data = result['data']
     return jsonify(data)
 
-@journal_bp.route('/api/journal/<string:entry_id>', methods=['PUT'])
-def update_journal_entry(entry_id):
-    # Get the JSON data from the request
-    updated_entry_data = request.json
-    
-    # Extract only the fields you want to update
-    fields_to_update = {
-        'entry_text': updated_entry_data.get('entry_text'),
-        'entry_timestamp': updated_entry_data.get('entry_timestamp')
-    }
-    
-    # Update the entry in the database with the extracted fields
-    result = supabase.table('journal_entries')\
-                     .update(fields_to_update)\
-                     .where('entry_id', '=', entry_id)\
-                     .execute()
-
-    # Check for errors and return the appropriate response
-    if result['error']:
-        return jsonify({'error': 'Failed to update journal entry.'}), 500
-    else:
-        return jsonify({'message': 'Journal entry updated successfully.'}), 200
-
 
 # Route to Delete a Journal Entry
 @journal_bp.route('/api/journal/<int:entry_id>', methods=['DELETE'])

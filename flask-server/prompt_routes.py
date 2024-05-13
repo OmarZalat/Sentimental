@@ -17,7 +17,7 @@ prompt_bp = Blueprint('prompt', __name__)
 # Route to Fetch Prompts
 @prompt_bp.route('/api/prompts', methods=['GET'])
 def get_prompts():
-    result = supabase.table('prompts_templates').select().execute()
+    result = supabase.table('prompt_templates').select().execute()
     data = result['data']
     return jsonify(data)
 

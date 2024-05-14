@@ -93,6 +93,18 @@ export default function Notepage() {
     }
   };
 
+  const runModel = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/run-model", {
+        entry_text: journalEntry,
+      });
+      console.log(`Response data of run model: ${response.data}`);
+    } catch (error) {
+      console.error("Error running model:", error);
+      console.log(journalEntry);
+    }
+  };
+
   const handleChange = (e) => {
     setJournalEntry(e.target.value);
   };
@@ -110,6 +122,9 @@ export default function Notepage() {
         />
         <button className={styles.save_button} onClick={saveJournalEntry}>
           Save
+        </button>
+        <button className={styles.run_model_button} onClick={runModel}>
+          Run model
         </button>
       </div>
     </>

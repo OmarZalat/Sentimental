@@ -85,6 +85,7 @@ export default function Notepage() {
         console.log("Journal entry saved successfully.");
         // Clear the journal entry after saving
         // setJournalEntry("");
+        runModel();
       } else {
         console.error("Failed to save journal entry.");
       }
@@ -122,9 +123,6 @@ export default function Notepage() {
         />
         <button className={styles.save_button} onClick={saveJournalEntry}>
           Save
-        </button>
-        <button className={styles.run_model_button} onClick={runModel}>
-          Run model
         </button>
       </div>
     </>

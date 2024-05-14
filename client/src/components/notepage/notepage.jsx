@@ -85,11 +85,24 @@ export default function Notepage() {
         console.log("Journal entry saved successfully.");
         // Clear the journal entry after saving
         // setJournalEntry("");
+        runModel();
       } else {
         console.error("Failed to save journal entry.");
       }
     } catch (error) {
       console.error("Error saving journal entry:", error);
+    }
+  };
+
+  const runModel = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/run-model", {
+        entry_text: journalEntry,
+      });
+      console.log(`Response data of run model: ${response.data}`);
+    } catch (error) {
+      console.error("Error running model:", error);
+      console.log(journalEntry);
     }
   };
 

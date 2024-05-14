@@ -10,6 +10,7 @@ from analysis_routes import analysis_bp
 from prompt_routes import prompt_bp
 from quotes_routes import quotes_bp
 from journal_routes import journal_bp
+from model import model_bp
 
 # Load environment variables from .env file
 load_dotenv()
@@ -23,6 +24,7 @@ app.register_blueprint(analysis_bp)
 app.register_blueprint(prompt_bp)
 app.register_blueprint(quotes_bp)
 app.register_blueprint(journal_bp)
+app.register_blueprint(model_bp)
 
 if __name__ == "__main__":
     app.run(debug=True)

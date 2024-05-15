@@ -4,8 +4,7 @@ import axios from "axios";
 import styles from "./googleAuthButton.module.css";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { UserContext } from "../../userProvider"; // Adjusted import to use named import
-
+import { UserContext } from "../../userProvider";
 export default function GoogleAuthButton() {
   const navigate = useNavigate();
   const { updateUser } = useContext(UserContext);
@@ -30,7 +29,6 @@ export default function GoogleAuthButton() {
         );
         console.log(backendResponse);
 
-        // Cookies.set("token", response.token_type, { expires: 7 });
         Cookies.set("token", response.access_token, {
           expires: 7,
           secure: true,

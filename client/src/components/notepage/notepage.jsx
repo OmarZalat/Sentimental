@@ -53,7 +53,6 @@ export default function Notepage() {
       if (userEntries.length > 0) {
         setJournalEntry(userEntries[0].entry_text);
         setEntryId(userEntries[0].entry_id); // Convert entry_id to string
-        console.log(entryId);
       }
     } catch (error) {
       console.error("Error fetching journal entries:", error);
@@ -89,38 +88,12 @@ export default function Notepage() {
       });
       if (response.ok) {
         console.log("Journal entry saved successfully.");
-
-        // fetchJournalEntries(); // Refetch journal entries to get the new entry_id
         console.log(entryId);
-
-        // console.log(userEntries.entry_id);
-        // setTimeout(() => {
-        //   runModel(entryId)
-        // }, 5000);
-        // runModel();
       } else {
         console.error("Failed to save journal entry.");
       }
     } catch (error) {
       console.error("Error saving journal entry:", error);
-    }
-  };
-
-  const runModel = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/run-model", {
-        entry_id: entryId,
-        entry_text: journalEntry,
-      });
-      console.log(`Response data of run model: ${response.data}`);
-      console.log(journalEntry);
-      console.log(entryId);
-      console.log(userEntries?.entry_id);
-    } catch (error) {
-      console.error("Error running model:", error);
-      console.log(journalEntry);
-      console.log(entryId);
-      console.log(userEntries?.entry_id);
     }
   };
 

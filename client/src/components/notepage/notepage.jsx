@@ -11,13 +11,18 @@ export default function Notepage() {
   const [entryId, setEntryId] = useState(null);
 
   useEffect(() => {
+    console.log("entryId:", entryId);
+  }, [entryId]);
+
+  useEffect(() => {
     // Fetch user data to get user_id based on email
     const fetchUserData = async () => {
       try {
         const response = await fetch(`http://127.0.0.1:5000/api/users`);
         const data = await response.json();
         console.log(`userdata email is ${userData.email}`);
-        console.log(`data is ${data}`);
+        console.log(`data is:`);
+        console.log(userData);
         const user = data.find((user) => user.email === userData.email);
         if (user) {
           setUserId(user.user_id);
@@ -35,27 +40,27 @@ export default function Notepage() {
     }
   }, [userData]);
 
-  useEffect(() => {
-    // Fetch journal entries and filter by user id
-    const fetchJournalEntries = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/journal");
-        const data = response.data;
-        const userEntries = data.filter((entry) => entry.user_id === userId);
-        console.log(userEntries);
-        setUserEntries(userEntries); // Assuming you have a state variable for user entries
+  // Fetch journal entries and filter by user id
+  const fetchJournalEntries = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/journal");
+      const data = response.data;
+      const userEntries = data.filter((entry) => entry.user_id === userId);
+      console.log(userEntries);
+      setUserEntries(userEntries); // Assuming you have a state variable for user entries
 
-        // If the user has entries, set the journalEntry state to the entry_text of the first entry
-        if (userEntries.length > 0) {
-          setJournalEntry(userEntries[0].entry_text);
-          setEntryId(userEntries[0].entry_id); // Convert entry_id to string
-          console.log(entryId);
-        }
-      } catch (error) {
-        console.error("Error fetching journal entries:", error);
+      // If the user has entries, set the journalEntry state to the entry_text of the first entry
+      if (userEntries.length > 0) {
+        setJournalEntry(userEntries[0].entry_text);
+        setEntryId(userEntries[0].entry_id); // Convert entry_id to string
+        console.log(entryId);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching journal entries:", error);
+    }
+  };
 
+  useEffect(() => {
     // Only fetch if userId is not null
     if (userId) {
       fetchJournalEntries();
@@ -67,6 +72,7 @@ export default function Notepage() {
       // Check if an entry_id already exists
       if (entryId) {
         console.log("Entry already exists. Skipping save operation.");
+        console.log(entryId);
         return; // Exit the function early
       }
 
@@ -83,9 +89,15 @@ export default function Notepage() {
       });
       if (response.ok) {
         console.log("Journal entry saved successfully.");
-        // Clear the journal entry after saving
-        // setJournalEntry("");
-        runModel();
+
+        // fetchJournalEntries(); // Refetch journal entries to get the new entry_id
+        console.log(entryId);
+
+        // console.log(userEntries.entry_id);
+        // setTimeout(() => {
+        //   runModel(entryId)
+        // }, 5000);
+        // runModel();
       } else {
         console.error("Failed to save journal entry.");
       }
@@ -97,12 +109,18 @@ export default function Notepage() {
   const runModel = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/run-model", {
+        entry_id: entryId,
         entry_text: journalEntry,
       });
       console.log(`Response data of run model: ${response.data}`);
+      console.log(journalEntry);
+      console.log(entryId);
+      console.log(userEntries?.entry_id);
     } catch (error) {
       console.error("Error running model:", error);
       console.log(journalEntry);
+      console.log(entryId);
+      console.log(userEntries?.entry_id);
     }
   };
 

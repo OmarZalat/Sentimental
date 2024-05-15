@@ -80,11 +80,29 @@ def initialize_model(journal_entry):
 def run_model():
     data = request.json  # Assuming JSON data is sent from the frontend
     # Process the input data and run your model here
-    fetchedData = data.get('entry_text')
+    print("data received is")
+    print(data)
+    entryText = data.get('entry_text')
+    entryID = data.get('entry_id')
     print("fetched data")
-    print(fetchedData)
+    print(entryText)
+    print("entry id", entryID)
     # Call initialize_model to get the values
-    sentiment_score, entities, most_repeated_words = initialize_model(fetchedData)
+    sentiment_score, entities, most_repeated_words = initialize_model(entryText)
+
+ # Save the data to the analysis_data table
+    response = supabase.table('analysis_data').insert([{
+        'entry_id': entryID,  # Add the entry ID to the data
+        'sentiment_score': sentiment_score,
+        'topic_keywords': most_repeated_words,
+        'entity_extraction': entities
+    }])
+    
+    # Check if the insertion was successful
+    if response.error is None:
+        print("Data saved successfully to analysis_data table.")
+    else:
+        print("Failed to save data to analysis_data table:", response.error)
 
 
     # Return the results

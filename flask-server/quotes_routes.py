@@ -14,11 +14,13 @@ supabase = create_client(supabase_url, supabase_key)
 # Create Blueprint for quotes routes
 quotes_bp = Blueprint('quotes', __name__)
 
+# Function to fetch quotes
+def fetch_quotes():
+    result = supabase.table('quotes').select().execute()
+    return result['data']
+
 # Route to Fetch Quotes
 @quotes_bp.route('/api/quotes', methods=['GET'])
 def get_quotes():
-    result = supabase.table('quotes').select().execute()
-    data = result['data']
+    data = fetch_quotes()
     return jsonify(data)
-
-# Add more quotes-related routes as needed...

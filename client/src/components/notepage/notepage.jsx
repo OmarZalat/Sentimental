@@ -68,11 +68,10 @@ export default function Notepage() {
 
   const saveJournalEntry = async () => {
     try {
-      // Check if an entry_id already exists
       if (entryId) {
         console.log("Entry already exists. Skipping save operation.");
         console.log(entryId);
-        return; // Exit the function early
+        return;
       }
 
       const response = await fetch("http://localhost:5000/api/journal", {
@@ -83,12 +82,18 @@ export default function Notepage() {
         body: JSON.stringify({
           user_id: userId,
           entry_text: journalEntry,
-          entry_timestamp: new Date().toISOString(), // Add timestamp
+          entry_timestamp: new Date().toISOString(),
         }),
       });
+
+      const data = await response.json();
+
       if (response.ok) {
         console.log("Journal entry saved successfully.");
         console.log(entryId);
+        if (data.alert_message) {
+          alert(data.alert_message); // Display the alert message
+        }
       } else {
         console.error("Failed to save journal entry.");
       }

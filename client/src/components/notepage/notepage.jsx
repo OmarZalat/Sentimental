@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./notepage.module.css";
 import { UserContext } from "../../userProvider";
 import axios from "axios";
@@ -9,6 +9,11 @@ export default function Notepage() {
   const [userId, setUserId] = useState(null);
   const [userEntries, setUserEntries] = useState([]);
   const [entryId, setEntryId] = useState(null);
+  const [prompts, setPrompts] = useState({
+    topic: null,
+    emotion: null,
+    intent: null,
+  });
 
   useEffect(() => {
     console.log("entryId:", entryId);
@@ -91,8 +96,12 @@ export default function Notepage() {
       if (response.ok) {
         console.log("Journal entry saved successfully.");
         console.log(entryId);
+        console.log(data);
         if (data.alert_message) {
           alert(data.alert_message); // Display the alert message
+        }
+        if (data.prompts) {
+          setPrompts(data.prompts); // Set the prompts state
         }
       } else {
         console.error("Failed to save journal entry.");
@@ -120,6 +129,14 @@ export default function Notepage() {
         <button className={styles.save_button} onClick={saveJournalEntry}>
           Save
         </button>
+      </div>
+      <div className={styles.prompts}>
+        <h2>Prompts</h2>
+        <ul>
+          {prompts.topic && <li>Topic: {prompts.topic}</li>}
+          {prompts.emotion && <li>Emotion: {prompts.emotion}</li>}
+          {prompts.intent && <li>Intent: {prompts.intent}</li>}
+        </ul>
       </div>
     </>
   );

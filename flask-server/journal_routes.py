@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from model import initialize_model
 import requests
+import random
 
 # Load environment variables from .env file
 load_dotenv()
@@ -63,10 +64,40 @@ def add_journal_entry():
         except Exception as e:
             print('Error calling alert route:', e)
 
+    # Fetch prompts from the existing prompts route
+    try:
+        prompts_response = requests.get("http://localhost:5000/api/prompts")
+        if prompts_response.status_code == 200:
+            prompts = prompts_response.json()
+
+            # Filter prompts by type
+            topic_prompts = [prompt['prompt_text'] for prompt in prompts if prompt['type'] == 'topic']
+            emotion_prompts = [prompt['prompt_text'] for prompt in prompts if prompt['type'] == 'emotions']
+            intent_prompts = [prompt['prompt_text'] for prompt in prompts if prompt['type'] == 'intent']
+
+            # Select one random prompt from each type
+            topic_prompt = random.choice(topic_prompts) if topic_prompts else None
+            emotion_prompt = random.choice(emotion_prompts) if emotion_prompts else None
+            intent_prompt = random.choice(intent_prompts) if intent_prompts else None
+
+            print('Random Topic Prompt:', topic_prompt)
+            print('Random Emotion Prompt:', emotion_prompt)
+            print('Random Intent Prompt:', intent_prompt)
+        else:
+            print('Failed to fetch prompts')
+    except Exception as e:
+        print('Error fetching prompts:', e)
+
     return jsonify({
         'message': 'Journal entry and analysis data added successfully.',
-        'alert_message': alert_message
+        'alert_message': alert_message,
+        'prompts': {
+            'topic': topic_prompt,
+            'emotion': emotion_prompt,
+            'intent': intent_prompt
+        }
     }), 200
+
 
 @journal_bp.route('/api/journal', methods=['GET'])
 def get_journal_entries():

@@ -21,4 +21,3 @@ def get_prompts():
     data = result['data']
     return jsonify(data)
 
-# Add more prompt-related routes as needed...

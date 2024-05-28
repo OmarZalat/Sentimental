@@ -22,7 +22,12 @@ export default function Journal() {
         </div>
         <div className={styles.wrapper}>
           <div className={styles.navigation}>
-            <button className={styles.dashboard_button}>Dashboard</button>
+            <button
+              className={styles.dashboard_button}
+              onClick={() => navigate("/dashboard")}
+            >
+              Dashboard
+            </button>
             <button className={styles.signOut_button} onClick={handleSignOut}>
               Sign out
             </button>

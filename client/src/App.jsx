@@ -5,6 +5,7 @@ import "./App.css";
 import Landing from "./pages/landing/landing";
 import Journal from "./pages/journal/journal";
 import UserProvider from "./userProvider";
+import Dashboard from "./pages/dashboard/dashboard";
 
 function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/journal" element={<Journal />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </UserProvider>
     </HelmetProvider>

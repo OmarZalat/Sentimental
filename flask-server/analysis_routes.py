@@ -21,4 +21,11 @@ def get_analysis_data():
     data = result['data']
     return jsonify(data)
 
+# Route to Fetch Analysis Data by Entry ID
+@analysis_bp.route('/api/analysis/<entry_id>', methods=['GET'])
+def get_analysis_data_by_entry_id(entry_id):
+    result = supabase.table('analysis_data').select().eq('entry_id', entry_id).execute()
+    data = result['data']
+    return jsonify(data)
+
 # Add more analysis-related routes as needed...

@@ -1,0 +1,49 @@
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.navigation button {
+  text-align: center;
+  height: 3.5rem;
+  width: 8rem;
+  background-color: #e48765;
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  transition: 0.5s;
+}
+
+.navigation button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.mood {
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+}
+
+h2 {
+  padding: 2rem;
+}
+
+.repeatedWords {
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+}
+
+.keywordsList {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.keywordsList li {
+  margin-right: 1rem;
+}

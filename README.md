@@ -1,5 +1,7 @@
 # Sentimental
 
+![Uploading Sentimental-Landing-Page.png…]()
+
 Sentimental is a smart journaling app designed to assist users in self-reflection, emotional expression, and personal growth through the power of artificial intelligence and natural language processing (NLP). By providing a seamless journaling experience coupled with intelligent analysis and personalized feedback, Sentimental empowers individuals to better understand their emotions, identify patterns, and foster positive mental well-being.
 
 ## Key Features

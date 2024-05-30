@@ -78,4 +78,4 @@ If you have any questions, suggestions, or feedback, please feel free to reach o
 
 ---
 
-*Thank you for using Sentimental! We hope it helps you on your journey to better understand and improve your emotional well-being.*
+## NOTE: THIS IS STILL AN UNFINISHED PROJECT. API ENDPOINTS AND DATABASE ARE STILL PRIVATE. THIS IS JUST TO SHOWCASE MY SKILLS.

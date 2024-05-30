@@ -63,13 +63,15 @@ We welcome contributions from the community! If you'd like to contribute to Sent
     ```
 5. Create a new Pull Request.
 
+<!--
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+-->
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, please feel free to reach out to us at [youremail@example.com](mailto:youremail@example.com).
+If you have any questions, suggestions, or feedback, please feel free to reach out to us at zaltomar18@gmail.com.
 
 ---
 

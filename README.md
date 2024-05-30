@@ -22,7 +22,7 @@ To install and run Sentimental locally, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/sentimental.git
+    git clone https://github.com/OmarZalat/Sentimental
     ```
 2. Navigate to the project directory:
     ```bash
@@ -34,7 +34,7 @@ To install and run Sentimental locally, follow these steps:
     ```
 4. Start the application:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Usage

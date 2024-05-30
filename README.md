@@ -16,6 +16,7 @@ Based on the analysis results, Sentimental delivers personalized prompts, uplift
 ### Data Visualization
 Sentimental features interactive data visualizations that display mood and mental health trends over time. Users can track their emotional well-being, observe patterns, and monitor progress towards their personal goals.
 
+<!--
 ## Installation
 
 To install and run Sentimental locally, follow these steps:
@@ -36,6 +37,7 @@ To install and run Sentimental locally, follow these steps:
     ```bash
     npm run dev
     ```
+-->
 
 ## Usage
 
@@ -44,6 +46,7 @@ To install and run Sentimental locally, follow these steps:
 3. Review the AI-driven analysis and personalized feedback after each entry.
 4. Explore the data visualizations to track your emotional well-being and observe patterns over time.
 
+<!--
 ## Contributing
 
 We welcome contributions from the community! If you'd like to contribute to Sentimental, please follow these steps:
@@ -63,7 +66,7 @@ We welcome contributions from the community! If you'd like to contribute to Sent
     ```
 5. Create a new Pull Request.
 
-<!--
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
